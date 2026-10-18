@@ -1,0 +1,29 @@
+name: Daily Food Science Safety Sync
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Run daily at 02:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Fetch Script
+        run: |
+          python3 scripts/fetch_live_data.py
+
+      - name: Commit & Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add web/js/live-market-data.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(data): auto update food safety parameters [skip ci]" && git push)

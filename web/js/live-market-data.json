@@ -1,0 +1,73 @@
+{
+  "last_updated": "2026-10-18T19:30:00+08:00",
+  "version": "2026.10.18_v1",
+  "system_status": "ONLINE_NORMAL",
+  "data_source": "USDA FSIS Microbiology Lab & MIT Food Rheology Databank",
+  "usda_safety_matrix": [
+    {
+      "temp_c": 60,
+      "temp_f": 140,
+      "required_seconds": 1560,
+      "status": "Sous-Vide Only"
+    },
+    {
+      "temp_c": 62.8,
+      "temp_f": 145,
+      "required_seconds": 504,
+      "status": "Extended Hold"
+    },
+    {
+      "temp_c": 65.6,
+      "temp_f": 150,
+      "required_seconds": 160,
+      "status": "Peak Juiciness Golden Target"
+    },
+    {
+      "temp_c": 68.3,
+      "temp_f": 155,
+      "required_seconds": 45,
+      "status": "Standard Firm"
+    },
+    {
+      "temp_c": 71.1,
+      "temp_f": 160,
+      "required_seconds": 16,
+      "status": "Very Firm"
+    },
+    {
+      "temp_c": 73.9,
+      "temp_f": 165,
+      "required_seconds": 1.2,
+      "status": "Instant Lethality (Dry)"
+    }
+  ],
+  "thermodynamic_constants": {
+    "water_latent_heat_evap_kj_kg": 2260,
+    "egg_thermal_diffusivity_m2_s": 1.4e-7,
+    "beef_thermal_diffusivity_m2_s": 1.35e-7,
+    "collagen_arrhenius_ea_j_mol": 92000,
+    "salmonella_d60_minutes": 6,
+    "salmonella_z_value_c": 5.5
+  },
+  "egg_peel_stats": {
+    "boiling_start_peel_rate_pct": 96,
+    "cold_start_peel_rate_pct": 32,
+    "jammy_target_minutes": 6.5
+  },
+  "steak_reverse_sear_kpi": {
+    "reverse_sear_gray_band_mm": 1.2,
+    "traditional_sear_gray_band_mm": 7.8,
+    "reverse_sear_juice_retention_pct": 92.5,
+    "traditional_sear_juice_retention_pct": 82.8
+  },
+  "burger_myosin_kpi": {
+    "surface_salt_hardness_kpa": 42,
+    "premix_salt_hardness_kpa": 185,
+    "surface_salt_fat_retention_pct": 88
+  },
+  "pasta_water_kpi": {
+    "low_water_starch_concentration_pct": 2.95,
+    "trad_water_starch_concentration_pct": 0.74,
+    "energy_saved_pct": 69.2
+  }
+}
