@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheFoodLabLearning | 料理实验室：现代烹饪科学与微观物理研习平台 (Anthropic Edition)</title>
+  <meta name="description" content="深入解构 J. Kenji López-Alt 殿堂级巨著《料理实验室 (The Food Lab)》：分子热力学、水汽化潜热障壁、牛排逆向慢烤、蝴蝶展平法、沙门氏菌巴氏杀菌、肌球蛋白盐溶抽提与水包油乳化胶体物理。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css?v=20261018_v1">
+  
+  <!-- KaTeX High-Performance Math Engine (Vendored Local + Fallback) -->
+  <link rel="stylesheet" href="vendor/katex/katex.min.css" onerror="this.onerror=null;this.href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css';">
+  <script src="vendor/katex/katex.min.js" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js';"></script>
+  <script src="vendor/katex/auto-render.min.js" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js';"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" title="切换目录侧边栏">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <a href="index.html" class="nav-brand">
+          <div class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 1 5 5c0 2-1 3.5-2 4.5V17a3 3 0 0 1-6 0v-5.5C8 10.5 7 9 7 7a5 5 0 0 1 5-5z"/><path d="M9 22h6"/></svg>
+          </div>
+          <span>TheFoodLabLearning</span>
+          <span class="brand-badge">FOOD LAB · SCIENCE · MIT</span>
+        </a>
+      </div>
+
+      <nav class="nav-center-menu">
+        <a href="#overviewSection" class="nav-item-btn active" id="navBtn_overview" onclick="app.switchMainView('overview'); return false;">📖 课程总览</a>
+        <a href="#curriculumSection" class="nav-item-btn" id="navBtn_curriculum" onclick="app.switchMainView('curriculum'); return false;">📚 课程研习</a>
+        <a href="#librarySection" class="nav-item-btn" id="navBtn_library" onclick="app.switchMainView('library'); return false;">🏛️ 经典文献文库</a>
+      </nav>
+
+      <div class="nav-right-actions">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="切换深色/浅色模式">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+
+        <!-- GitHub Repo Link -->
+        <a href="https://github.com/hsthanb4/foodlab-course" target="_blank" rel="noopener" class="theme-toggle-btn" title="查看 GitHub 仓库源码">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Body Container -->
+    <div class="main-wrapper">
+      <!-- Left Course Sidebar -->
+      <aside class="course-sidebar" id="courseSidebar">
+        <div class="sidebar-header">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="sidebarSearchInput" placeholder="检索 6 大模块与 12 门核心课...">
+          </div>
+        </div>
+
+        <!-- 6 Modules Tree List -->
+        <div class="module-tree-container" id="sidebarModuleTree">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </aside>
+
+      <!-- Center Main Content Workspace -->
+      <main class="content-area">
+
+        <!-- =========================================================
+             1. DEDICATED COURSE OVERVIEW SECTION
+             ========================================================= -->
+        <section class="overview-section" id="overviewSection" style="display:block;">
+          <div class="overview-hero-header">
+            <div class="overview-eyebrow">FIRST PRINCIPLES OF CULINARY SCIENCE & THERMODYNAMICS</div>
+            <h1 class="overview-main-title">《料理实验室》烹饪科学研习总览：终结经验谣言，重塑分子第一性原理</h1>
+            <p class="overview-lead-text">
+              本课程全方位深度拆解 J. Kenji López-Alt 荣获詹姆斯·比尔德大奖的划时代巨著《料理实验室（The Food Lab）》。
+              我们将麻省理工学院（MIT）的严格受控实验方法论与物理化学第一性原理引入厨房，系统解构水分子汽化潜热障壁、肌球蛋白盐溶抽提、
+              细菌热致死对数衰减动力学与直链淀粉老化回生微晶硬化相转变。彻底粉碎“大火封边锁水”、“大锅沸水煮意面”、“74°C 才能灭菌”等陈旧厨房神话，
+              帮助你建立无论面对任何食材均能精准推演其微观状态的“厨房物理直觉”。
+            </p>
+
+            <div class="overview-key-pillars">
+              <div class="pillar-card">
+                <div class="pillar-icon">🔬</div>
+                <div class="pillar-title">MIT 严苛可控对照实验</div>
+                <div class="pillar-desc">单变量控制、盲测感官评估与分光光度计吸收峰测定，以数千次实测数据消灭玄学。</div>
+              </div>
+              <div class="pillar-card">
+                <div class="pillar-icon">⚡</div>
+                <div class="pillar-title">热力学与汽化潜热解耦</div>
+                <div class="pillar-desc">突破 2260 kJ/kg 水蒸发潜热夹层，解耦内部均温与外表极温结壳，消除牛排 90% 灰圈。</div>
+              </div>
+              <div class="pillar-card">
+                <div class="pillar-icon">🧬</div>
+                <div class="pillar-title">两相胶体微观界面工程</div>
+                <div class="pillar-desc">卵磷脂双亲胶束网络、高剪切负压自吸流场与淀粉空间位阻，掌控乳化稳态相图。</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Master Architecture Diagram -->
+          <div class="overview-diagram-wrapper">
+            <div class="overview-diagram-header">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span class="diagram-tag" style="background:rgba(204, 90, 54, 0.1); color:#CC5A36; border:1px solid rgba(204, 90, 54, 0.3);">MASTER ARCHITECTURE</span>
+                <span style="font-weight:700; font-size:1.05rem; color:var(--text-primary);">《现代烹饪科学四大第一性动力学与全书六大模块因果传导总图谱》</span>
+              </div>
+              <button class="zoom-btn" onclick="app.openLightboxWithSvg('overviewArchitectureSvg')">🔍 点击全屏无级放大</button>
+            </div>
+
+            <div class="overview-svg-box">
+              <svg id="overviewArchitectureSvg" class="scientific-svg" viewBox="0 0 860 480" width="100%" style="max-width:100%; height:auto; display:block;" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="grid_overview" width="24" height="24" patternUnits="userSpaceOnUse">
+                    <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#EFECE6" stroke-width="0.8"/>
+                  </pattern>
+                  <marker id="arrow_roadmap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#CC5A36"/>
+                  </marker>
+                </defs>
+                <rect width="860" height="480" fill="#FAF8F5"/>
+                <rect width="860" height="480" fill="url(#grid_overview)"/>
+
+                <!-- Top Tier: Level 1 Non-steady Heat & Thermal Shock -->
+                <g transform="translate(36, 30)">
+                  <rect width="374" height="110" rx="8" fill="#FFFFFF" stroke="#E2DDD5" stroke-width="1.5"/>
+                  <rect width="6" height="110" rx="3" fill="#CC5A36"/>
+                  <text x="20" y="28" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#1F1E1B">层级 01 · 径向热扩散与热休克</text>
+                  <text x="20" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 模块 01：水煮蛋同心球导热与 100°C 膜层热休克</text>
+                  <text x="20" y="72" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• FeS 变绿动力学阈值 (77°C) & 炒蛋加盐离子水合层</text>
+                  <text x="20" y="92" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#CC5A36">核心算式：T(r,t) 傅里叶导热衰减 & 脱水收缩抑制</text>
+                </g>
+
+                <g transform="translate(446, 30)">
+                  <rect width="378" height="110" rx="8" fill="#FFFFFF" stroke="#E2DDD5" stroke-width="1.5"/>
+                  <rect width="6" height="110" rx="3" fill="#D97706"/>
+                  <text x="20" y="28" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#1F1E1B">层级 02 · 潜热障壁与宏观流体力学</text>
+                  <text x="20" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 模块 02：水汽化潜热 (2260 kJ/kg) 压制美拉德反应</text>
+                  <text x="20" y="72" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 逆向慢烤解耦升温与结壳；醒肉明胶黏度毛细保水</text>
+                  <text x="20" y="92" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#D97706">核心算式：q_surface 净吸热方程 & ΔP(t) 静水压衰减</text>
+                </g>
+
+                <!-- Arrows Down -->
+                <path d="M 223 140 L 223 175" fill="none" stroke="#CC5A36" stroke-width="2" marker-end="url(#arrow_roadmap)"/>
+                <path d="M 635 140 L 635 175" fill="none" stroke="#CC5A36" stroke-width="2" marker-end="url(#arrow_roadmap)"/>
+
+                <!-- Middle Tier: Level 3 Geometry & Microbiological Inactivation -->
+                <g transform="translate(36, 180)">
+                  <rect width="374" height="110" rx="8" fill="#FFFFFF" stroke="#E2DDD5" stroke-width="1.5"/>
+                  <rect width="6" height="110" rx="3" fill="#16A34A"/>
+                  <text x="20" y="28" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#1F1E1B">层级 03 · 几何平板导热与细菌 D 值</text>
+                  <text x="20" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 模块 03：蝴蝶展平法 (Spatchcocking) 3D球降维2D板</text>
+                  <text x="20" y="72" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 胸(65°C)+腿(76°C)同步达成；沙门氏菌等效巴氏杀菌</text>
+                  <text x="20" y="92" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#16A34A">核心算式：log10(N0/Nt) = t / D(T) 对数衰减法则</text>
+                </g>
+
+                <g transform="translate(446, 180)">
+                  <rect width="378" height="110" rx="8" fill="#FFFFFF" stroke="#E2DDD5" stroke-width="1.5"/>
+                  <rect width="6" height="110" rx="3" fill="#0284C7"/>
+                  <text x="20" y="28" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#1F1E1B">层级 04 · 蛋白质胶体化学与流变学</text>
+                  <text x="20" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 模块 04：肌球蛋白盐溶抽提与汉堡松散多汁解耦</text>
+                  <text x="20" y="72" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 蛋黄酱水包油 O/W 卵磷脂胶束微观包裹与均质机自吸</text>
+                  <text x="20" y="92" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#0284C7">核心算式：Krieger-Dougherty 胶体黏度方程 & 剪切粒径</text>
+                </g>
+
+                <!-- Arrows Down -->
+                <path d="M 223 290 L 223 325" fill="none" stroke="#CC5A36" stroke-width="2" marker-end="url(#arrow_roadmap)"/>
+                <path d="M 635 290 L 635 325" fill="none" stroke="#CC5A36" stroke-width="2" marker-end="url(#arrow_roadmap)"/>
+
+                <!-- Bottom Tier: Level 5 Polymers, Starch Retrogradation & Enzyme Kinetics -->
+                <g transform="translate(36, 330)">
+                  <rect width="374" height="115" rx="8" fill="#FFFFFF" stroke="#E2DDD5" stroke-width="1.5"/>
+                  <rect width="6" height="115" rx="3" fill="#8B5CF6"/>
+                  <text x="20" y="28" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#1F1E1B">层级 05 · 淀粉相变与高分子位阻</text>
+                  <text x="20" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 模块 05：三段法薯条：微酸果胶强化 + 直链淀粉回生</text>
+                  <text x="20" y="72" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 科学少水煮意面 (1.5L) 溶出 3% 淀粉水乳化奶酪防结块</text>
+                  <text x="20" y="94" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#8B5CF6">核心算式：t_crisp 回生寿命模型 & 空间位阻自由能</text>
+                </g>
+
+                <g transform="translate(446, 330)">
+                  <rect width="378" height="115" rx="8" fill="#FFFFFF" stroke="#E2DDD5" stroke-width="1.5"/>
+                  <rect width="6" height="115" rx="3" fill="#EC4899"/>
+                  <text x="20" y="28" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#1F1E1B">层级 06 · 结缔组织水解与酶活阻断</text>
+                  <text x="20" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 模块 06：I型胶原蛋白三螺旋阿伦尼乌斯水解为明胶</text>
+                  <text x="20" y="72" font-family="'Inter', sans-serif" font-size="11" fill="#4E4B45">• 高压锅 (121°C) 速率暴增 11 倍；叶绿素微碱冰镇护色</text>
+                  <text x="20" y="94" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#EC4899">核心算式：k = A*exp(-Ea/RT) & 脱镁反应速率方程</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 6 Detailed Module Roadmap Cards -->
+          <div class="overview-modules-detail-grid" style="margin-top:36px; display:grid; grid-template-columns:repeat(auto-fit, minmax(380px, 1fr)); gap:20px;">
+            <div class="overview-module-card">
+              <div class="omc-header">
+                <span class="omc-num">MODULE 01</span>
+                <span class="omc-title">蛋与晨间热力学 (Eggs & Breakfast)</span>
+              </div>
+              <div class="omc-body">
+                <p><strong>在体系中的角色：</strong>全书第一性原理破冰起点。从最简单的同心球对称单体食材出发，建立径向非稳态热传导与微观蛋白质热变性温区直觉。</p>
+                <p><strong>跨模块咬合：</strong>剥壳热休克机制直接外推至模块 06 蔬菜焯水急冷；提前加盐离子屏蔽水合层，为模块 04 绞肉盐溶抽提构成了正反互补的对比坐标。</p>
+                <p><strong>模块内递进：</strong>L01 攻克全蛋壳内导热阶梯与 FeS 变绿化学反应 ➔ L02 深入打散后蛋液胶体多肽链在食盐离子水合下的脱水收缩抑制。</p>
+              </div>
+            </div>
+
+            <div class="overview-module-card">
+              <div class="omc-header">
+                <span class="omc-num">MODULE 02</span>
+                <span class="omc-title">肉类传热学与美拉德反应 (Meat & Heat Transfer)</span>
+              </div>
+              <div class="omc-body">
+                <p><strong>在体系中的角色：</strong>宏观相变热力学核心。直面厨房历史上最大的“大火锁肉汁”迷思，量化水汽化潜热（2260 kJ/kg）对氨基酸褐变反应的绝对压制。</p>
+                <p><strong>跨模块咬合：</strong>逆向慢烤解耦思维直接启发了模块 03 蝴蝶展平法；醒肉内部高静水压与明胶黏度毛细保水，构成了肉排与大块家禽出锅后必备的标准工序。</p>
+                <p><strong>模块内递进：</strong>L01 解决牛排外部焦壳与内部灰圈的热力学解耦 ➔ L02 解决出锅后肌纤维收缩高压梯度抚平与泊肃叶流阻保水。</p>
+              </div>
+            </div>
+
+            <div class="overview-module-card">
+              <div class="omc-header">
+                <span class="omc-num">MODULE 03</span>
+                <span class="omc-title">家禽几何传热与微生物安全 (Poultry & Pasteurization)</span>
+              </div>
+              <div class="omc-body">
+                <p><strong>在体系中的角色：</strong>几何拓扑传热与生物安全规范。打破 3D 空心不规则受热死局，将微生物致死从“单一高温教条”回归到科学对数动力学曲线。</p>
+                <p><strong>跨模块咬合：</strong>蝴蝶展平法极大拓展了模块 02 的一维平板导热应用；沙门氏菌等效巴氏杀菌时间-温度表为全书所有肉类安全设定法定边界。</p>
+                <p><strong>模块内递进：</strong>L01 通过剪除脊椎将 3D 球体降维为 2D 平板实现胸嫩腿熟 ➔ L02 运用 D 值模型计算 65.5°C 维持 2.7 分钟达成 7-log10 极品多汁灭菌。</p>
+              </div>
+            </div>
+
+            <div class="overview-module-card">
+              <div class="omc-header">
+                <span class="omc-num">MODULE 04</span>
+                <span class="omc-title">胶体化学与肉糜粘结力学 (Ground Meat & Emulsions)</span>
+              </div>
+              <div class="omc-body">
+                <p><strong>在体系中的角色：</strong>微观分子交联与两相界面流变学。探索绞肉被机械破碎后，肌球蛋白由内源束缚变为外源连续网格的物理重构。</p>
+                <p><strong>跨模块咬合：</strong>汉堡肉饼撒盐时机与模块 01 炒蛋加盐机理相反相成；蛋黄酱水包油乳化胶束为模块 05 意面淀粉水乳化奶酪提供了完整的物理基础。</p>
+                <p><strong>模块内递进：</strong>L01 掌握肌球蛋白盐溶抽提与汉堡松散多汁解耦 ➔ L02 突破蛋黄酱油水比极限，运用手持均质机 10,000 RPM 自吸两相流 10 秒乳化。</p>
+              </div>
+            </div>
+
+            <div class="overview-module-card">
+              <div class="omc-header">
+                <span class="omc-num">MODULE 05</span>
+                <span class="omc-title">淀粉微观物理与极限酥脆工程 (Starch & Crisp Physics)</span>
+              </div>
+              <div class="omc-body">
+                <p><strong>在体系中的角色：</strong>高分子植物多糖微观相变工程。掌握直链淀粉吸水膨胀、胶凝、冷冻老化结晶与蒸汽微孔发泡全周期演进。</p>
+                <p><strong>跨模块咬合：</strong>微酸加醋保护果胶与模块 06 蔬菜焯水酸碱调控遥相呼应；浓缩意面淀粉浆的高分子空间位阻，完美升华了模块 04 的水包油乳化理论。</p>
+                <p><strong>模块内递进：</strong>L01 运用微酸加固+冷冻回生+双温复炸构筑 28 分钟不塌软脆皮薯条 ➔ L02 颠覆 5L 大锅水神话，用 1.5L 浓缩淀粉水调制顺滑 Cacio e Pepe。</p>
+              </div>
+            </div>
+
+            <div class="overview-module-card">
+              <div class="omc-header">
+                <span class="omc-num">MODULE 06</span>
+                <span class="omc-title">结缔组织慢炖与高汤物理学 (Connective Tissue & Stocks)</span>
+              </div>
+              <div class="omc-body">
+                <p><strong>在体系中的角色：</strong>大分子化学水解动力学与酶活终极阻断。展示高压环境如何颠覆阿伦尼乌斯速率，以及金属络合离子在细胞壁层面的微观防护。</p>
+                <p><strong>跨模块咬合：</strong>高压水解出的可溶性明胶是模块 02 醒肉毛细保水与高汤黏润的终极物质来源；叶绿素脱镁防护将全书无机化学与物理热力学彻底闭环。</p>
+                <p><strong>模块内递进：</strong>L01 利用 121°C 高压饱和水蒸气将骨胶原水解效率提升 11 倍 ➔ L02 运用大锅宽水+微碱小苏打+冰水急冷三防体系锁死 90%+ 蔬菜叶绿素。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================
+             2. DEDICATED CURRICULUM LESSON WORKSPACE
+             ========================================================= -->
+        <section class="curriculum-section" id="curriculumSection" style="display:none;">
+          <div class="lesson-view-container" id="lessonViewContainer">
+            <!-- Dynamically populated by app.js renderCurrentLesson() -->
+          </div>
+        </section>
+
+        <!-- =========================================================
+             3. CLASSICAL LITERATURE RESEARCH LIBRARY
+             ========================================================= -->
+        <section class="library-section" id="librarySection" style="display:none;">
+          <div class="library-hero-header">
+            <div class="overview-eyebrow">THE CANONICAL CULINARY SCIENCE ARCHIVE</div>
+            <h1 class="library-main-title">🏛️ 经典烹饪科学文献文库</h1>
+            <p class="overview-lead-text">
+              严选 6 部奠定现代烹饪科学、分子美食与食品安全体系的划时代巨著与官方技术白皮书。
+              每部文献均经过严格人工核验，杜绝模糊搜索中转与 404 错误页，提供已验证的合法官方开放阅读直达通道与基于权威真实 MD5 的极速下载借阅直链。
+            </p>
+          </div>
+
+          <div class="library-books-grid" id="libraryBooksGrid">
+            <!-- Populated dynamically by app.js renderBooks() -->
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       4. FULLSCREEN VECTOR ZOOM LIGHTBOX MODAL
+       ========================================================= -->
+  <div class="lightbox-modal" id="diagramLightboxModal">
+    <div class="lightbox-backdrop" onclick="app.closeLightbox()"></div>
+    <div class="lightbox-content-box">
+      <div class="lightbox-top-bar">
+        <span class="lightbox-title" id="lightboxDiagramTitle">科学绘图全屏无级缩放查看器</span>
+        <div class="lightbox-actions">
+          <button class="lightbox-btn" onclick="app.zoomLightbox(0.2)" title="放大 (+20%)">🔍 放大</button>
+          <button class="lightbox-btn" onclick="app.zoomLightbox(-0.2)" title="缩小 (-20%)">🔍 缩小</button>
+          <button class="lightbox-btn" onclick="app.resetLightboxZoom()" title="重置比例 (100%)">↺ 100%</button>
+          <span class="lightbox-scale-indicator" id="lightboxScaleIndicator">100%</span>
+          <button class="lightbox-btn close-btn" onclick="app.closeLightbox()" title="关闭灯箱 (ESC)">✕ 关闭</button>
+        </div>
+      </div>
+      <div class="lightbox-svg-stage" id="lightboxSvgStage">
+        <!-- Cloned SVG inserted here dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data-curriculum.js?v=20261018_v1"></script>
+  <script src="js/data-books.js?v=20261018_v1"></script>
+  <script src="js/app.js?v=20261018_v1"></script>
+</body>
+</html>
